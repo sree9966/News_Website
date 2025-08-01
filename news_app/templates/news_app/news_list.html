@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest News Articles</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 60px;
+            background-color: #f8f9fa;
+        }
+        .article {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .article h2 {
+            font-size: 1.75rem;
+        }
+        .article p {
+            font-size: 1rem;
+        }
+        .article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Latest News Articles</h1>
+        
+        {% if articles %}
+            {% for article in articles %}
+                <div class="article mb-4">
+                    <h2>{{ article.title }}</h2>
+                    <p class="text-muted">
+                        <strong>Source:</strong> {{ article.source.name }} 
+                        | <small>Published at: {{ article.publishedAt }}</small>
+                    </p>
+                    <p>{{ article.description }}</p>
+                    {% if article.urlToImage %}
+                        <img src="{{ article.urlToImage }}" alt="Article Image" class="img-fluid mb-3">
+                    {% endif %}
+                    <p><a href="{{ article.url }}" class="btn btn-primary" target="_blank">Read More</a></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No news articles available.</p>
+        {% endif %}
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
