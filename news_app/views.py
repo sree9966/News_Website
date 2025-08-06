@@ -1,9 +1,14 @@
+import os
 import requests
+from dotenv import load_dotenv
 from django.shortcuts import render
 
+# Loading environment variables from .env
+load_dotenv()
+
 def fetch_news(request):
-    # Replace YOUR_GNEWS_API_KEY with your actual GNews API key.
-    api_url = "https://gnews.io/api/v4/top-headlines?token=bbc6c52ee3af530a5ec8d3f9660dabe7&lang=en&max=10"
+    api_key = os.getenv("GNEWS_API_KEY")
+    api_url =f"https://gnews.io/api/v4/top-headlines?token={api_key}&lang=en&country=in"
     try:
         response = requests.get(api_url, timeout=10)
         response.raise_for_status()
